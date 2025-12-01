@@ -10,6 +10,17 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* 버튼 부드러운 눌림 애니메이션 */
+    .card .btn {
+      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .card .btn:active {
+      transform: scale(0.90);
+    }
+  </style>
 </head>
 <body>
   <header class="bg-dark text-white py-3">
