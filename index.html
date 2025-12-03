@@ -12,13 +12,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* 버튼 부드러운 눌림 애니메이션 */
+    /* 더 부드러운 눌림 애니메이션 + 키/터치/마우스 모두 커버 */
     .card .btn {
-      transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      /* transform 애니메이션을 부드럽게 처리 (더 자연스러운 이징) */
+      transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+      -webkit-tap-highlight-color: transparent; /* 모바일에서 하이라이트 제거 */
     }
 
+    /* :active 는 브라우저 기본 동작을 커버하지만 모든 디바이스에서 일관적이지 않아 JS 클래스도 사용 */
     .card .btn:active {
-      transform: scale(0.90);
+      transform: scale(0.92);
+    }
+
+    /* JS로 추가되는 클래스(포인터 다운 동안 유지) */
+    .card .btn.pressed {
+      transform: scale(0.92) !important;
+    }
+
+    /* (선택) 눌렀을 때 그림자도 줄여 눌림감을 더해줌 */
+    .card .btn.pressed {
+      box-shadow: 0 4px 6px rgba(0,0,0,0.05) inset;
     }
   </style>
 </head>
@@ -77,7 +91,8 @@
             <div class="card-body">
               <h5 class="card-title">My Game</h5>
               <p class="card-text">This is a avoiding game.Inspired by Geometry Dash.</p>
-              <a href="project1.html" class="btn btn-primary">Learn More</a>
+              <!-- 버튼 동작을 JS로 제어하기 위해 data-href 사용 -->
+              <a href="project1.html" class="btn btn-primary project-link">Learn More</a>
             </div>
           </div>
         </div>
@@ -87,7 +102,7 @@
             <div class="card-body">
               <h5 class="card-title">Project 2</h5>
               <p class="card-text">This is a music that I made.</p>
-              <a href="project2.html" class="btn btn-primary">Learn More</a>
+              <a href="project2.html" class="btn btn-primary project-link">Learn More</a>
             </div>
           </div>
         </div>
@@ -97,7 +112,7 @@
             <div class="card-body">
               <h5 class="card-title">Project 3</h5>
               <p class="card-text">Not yet.</p>
-              <a href="project3.html" class="btn btn-primary">Learn More</a>
+              <a href="project3.html" class="btn btn-primary project-link">Learn More</a>
             </div>
           </div>
         </div>
@@ -130,5 +145,49 @@
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    // project-link 버튼 클릭 시 바로 이동하지 않고 누름 애니메이션을 보여준 뒤 이동합니다.
+    (function(){
+      const BUTTON_PRESS_DURATION = 180; // ms — 애니메이션이 끝난 뒤 이동
+
+      function handlePointerDown(e){
+        // add pressed class
+        e.currentTarget.classList.add('pressed');
+      }
+
+      function handlePointerUp(e){
+        // remove pressed class (keep short delay for visual)
+        e.currentTarget.classList.remove('pressed');
+      }
+
+      document.querySelectorAll('.project-link').forEach(btn => {
+        // pointer events for mouse + touch
+        btn.addEventListener('pointerdown', handlePointerDown);
+        btn.addEventListener('pointerup', handlePointerUp);
+        btn.addEventListener('pointercancel', handlePointerUp);
+        btn.addEventListener('pointerout', handlePointerUp);
+
+        // Intercept click to delay navigation so user sees the animation
+        btn.addEventListener('click', function(ev){
+          const href = btn.getAttribute('href');
+          if (!href) return;
+
+          // Prevent immediate navigation
+          ev.preventDefault();
+
+          // Ensure pressed class visible
+          btn.classList.add('pressed');
+
+          // After short delay navigate
+          setTimeout(() => {
+            // Remove the class (optional) and navigate
+            btn.classList.remove('pressed');
+            window.location.href = href;
+          }, BUTTON_PRESS_DURATION);
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
