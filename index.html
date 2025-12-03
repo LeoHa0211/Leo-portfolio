@@ -12,17 +12,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* 더 부드러운 눌림 애니메이션 */
+    /* 더 부드러운 눌림 애니메이션 + 키/터치/마우스 모두 커버 */
     .card .btn {
       transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
       will-change: transform;
       -webkit-tap-highlight-color: transparent;
     }
-
     .card .btn:active {
       transform: scale(0.92);
     }
-
     .card .btn.pressed {
       transform: scale(0.92) !important;
       box-shadow: 0 4px 6px rgba(0,0,0,0.05) inset;
@@ -112,31 +110,52 @@
     </div>
   </section>
 
-  <!-- Contact Section -->
+  <!-- Contact Me Section with EmailJS -->
   <section id="contact" class="py-5">
     <div class="container">
       <h2 class="text-center mb-4">Contact Me</h2>
 
-      <form action="mailto:leoha0211@gmail.com" method="POST" enctype="text/plain">
+      <form id="contact-form">
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" class="form-control wider-input" id="name" name="name" placeholder="Enter your name" required />
+          <input 
+            type="text" 
+            class="form-control wider-input" 
+            id="name" 
+            name="name" 
+            placeholder="Enter your name" 
+            required 
+          />
         </div>
 
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" class="form-control wider-input" id="email" name="email" placeholder="Enter your email" required />
+          <input 
+            type="email" 
+            class="form-control wider-input" 
+            id="email" 
+            name="email" 
+            placeholder="Enter your email" 
+            required 
+          />
         </div>
 
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea class="form-control wider-input" id="message" name="message" rows="5" placeholder="Write your message" required></textarea>
+          <textarea 
+            class="form-control wider-input" 
+            id="message" 
+            name="message" 
+            rows="5" 
+            placeholder="Write your message" 
+            required
+          ></textarea>
         </div>
 
-        <!-- Testpage.html 제거됨 -->
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
 
+      <div id="status" class="mt-3 text-center"></div>
     </div>
   </section>
 
@@ -145,32 +164,46 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
-    // Learn More 버튼 애니메이션 + 지연 이동
+    (function(){
+      emailjs.init("cynlYuesM_GUpxOin"); // EmailJS Public Key
+
+      const form = document.getElementById("contact-form");
+      const status = document.getElementById("status");
+
+      form.addEventListener("submit", function(e){
+        e.preventDefault(); // 페이지 새로고침 방지
+
+        emailjs.sendForm("service_w93vcyl", "template_xr5nd6j", this)
+        .then(function(){
+          status.innerHTML = '<span class="text-success">메일이 성공적으로 전송되었습니다!</span>';
+          form.reset();
+        }, function(error){
+          status.innerHTML = '<span class="text-danger">메일 전송 실패. 다시 시도해주세요.</span>';
+          console.error("EmailJS Error:", error);
+        });
+      });
+    })();
+  </script>
+
+  <script>
+    // project-link 버튼 클릭 시 눌림 애니메이션
     (function(){
       const BUTTON_PRESS_DURATION = 180;
-
-      function handlePointerDown(e){
-        e.currentTarget.classList.add('pressed');
-      }
-
-      function handlePointerUp(e){
-        e.currentTarget.classList.remove('pressed');
-      }
-
+      function handlePointerDown(e){ e.currentTarget.classList.add('pressed'); }
+      function handlePointerUp(e){ e.currentTarget.classList.remove('pressed'); }
       document.querySelectorAll('.project-link').forEach(btn => {
         btn.addEventListener('pointerdown', handlePointerDown);
         btn.addEventListener('pointerup', handlePointerUp);
         btn.addEventListener('pointercancel', handlePointerUp);
         btn.addEventListener('pointerout', handlePointerUp);
-
         btn.addEventListener('click', function(ev){
           const href = btn.getAttribute('href');
           if (!href) return;
           ev.preventDefault();
-
           btn.classList.add('pressed');
-
           setTimeout(() => {
             btn.classList.remove('pressed');
             window.location.href = href;
