@@ -12,26 +12,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* 더 부드러운 눌림 애니메이션 + 키/터치/마우스 모두 커버 */
+    /* 더 부드러운 눌림 애니메이션 */
     .card .btn {
-      /* transform 애니메이션을 부드럽게 처리 (더 자연스러운 이징) */
       transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
       will-change: transform;
-      -webkit-tap-highlight-color: transparent; /* 모바일에서 하이라이트 제거 */
+      -webkit-tap-highlight-color: transparent;
     }
 
-    /* :active 는 브라우저 기본 동작을 커버하지만 모든 디바이스에서 일관적이지 않아 JS 클래스도 사용 */
     .card .btn:active {
       transform: scale(0.92);
     }
 
-    /* JS로 추가되는 클래스(포인터 다운 동안 유지) */
     .card .btn.pressed {
       transform: scale(0.92) !important;
-    }
-
-    /* (선택) 눌렀을 때 그림자도 줄여 눌림감을 더해줌 */
-    .card .btn.pressed {
       box-shadow: 0 4px 6px rgba(0,0,0,0.05) inset;
     }
   </style>
@@ -91,7 +84,6 @@
             <div class="card-body">
               <h5 class="card-title">My Game</h5>
               <p class="card-text">This is a avoiding game.Inspired by Geometry Dash.</p>
-              <!-- 버튼 동작을 JS로 제어하기 위해 data-href 사용 -->
               <a href="project1.html" class="btn btn-primary project-link">Learn More</a>
             </div>
           </div>
@@ -120,24 +112,31 @@
     </div>
   </section>
 
+  <!-- Contact Section -->
   <section id="contact" class="py-5">
     <div class="container">
       <h2 class="text-center mb-4">Contact Me</h2>
-      <form>
+
+      <form action="mailto:leoha0211@gmail.com" method="POST" enctype="text/plain">
         <div class="form-group">
           <label for="name">Name</label>
-          <input type="text" class="form-control wider-input" id="name" placeholder="Enter your name" />
+          <input type="text" class="form-control wider-input" id="name" name="name" placeholder="Enter your name" required />
         </div>
+
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" class="form-control wider-input" id="email" placeholder="Enter your email" />
+          <input type="email" class="form-control wider-input" id="email" name="email" placeholder="Enter your email" required />
         </div>
+
         <div class="form-group">
           <label for="message">Message</label>
-          <textarea class="form-control wider-input" id="message" rows="5" placeholder="Write your message"></textarea>
+          <textarea class="form-control wider-input" id="message" name="message" rows="5" placeholder="Write your message" required></textarea>
         </div>
-        <a href="Testpage.html" class="btn btn-primary">Submit</a>
+
+        <!-- Testpage.html 제거됨 -->
+        <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+
     </div>
   </section>
 
@@ -147,41 +146,32 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
   <script>
-    // project-link 버튼 클릭 시 바로 이동하지 않고 누름 애니메이션을 보여준 뒤 이동합니다.
+    // Learn More 버튼 애니메이션 + 지연 이동
     (function(){
-      const BUTTON_PRESS_DURATION = 180; // ms — 애니메이션이 끝난 뒤 이동
+      const BUTTON_PRESS_DURATION = 180;
 
       function handlePointerDown(e){
-        // add pressed class
         e.currentTarget.classList.add('pressed');
       }
 
       function handlePointerUp(e){
-        // remove pressed class (keep short delay for visual)
         e.currentTarget.classList.remove('pressed');
       }
 
       document.querySelectorAll('.project-link').forEach(btn => {
-        // pointer events for mouse + touch
         btn.addEventListener('pointerdown', handlePointerDown);
         btn.addEventListener('pointerup', handlePointerUp);
         btn.addEventListener('pointercancel', handlePointerUp);
         btn.addEventListener('pointerout', handlePointerUp);
 
-        // Intercept click to delay navigation so user sees the animation
         btn.addEventListener('click', function(ev){
           const href = btn.getAttribute('href');
           if (!href) return;
-
-          // Prevent immediate navigation
           ev.preventDefault();
 
-          // Ensure pressed class visible
           btn.classList.add('pressed');
 
-          // After short delay navigate
           setTimeout(() => {
-            // Remove the class (optional) and navigate
             btn.classList.remove('pressed');
             window.location.href = href;
           }, BUTTON_PRESS_DURATION);
