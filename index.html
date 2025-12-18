@@ -5,28 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Personal portfolio website showcasing projects and biography." />
   <title>Welcome to Yugyeom's Portfolio</title>
+
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+
   <!-- Custom CSS -->
   <link rel="stylesheet" href="css/style.css" />
+
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* 더 부드러운 눌림 애니메이션 + 키/터치/마우스 모두 커버 */
+    /* 더 부드러운 버튼 눌림 애니메이션 */
     .card .btn {
       transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
       will-change: transform;
       -webkit-tap-highlight-color: transparent;
     }
-    .card .btn:active {
-      transform: scale(0.92);
-    }
+
+    .card .btn:active,
     .card .btn.pressed {
-      transform: scale(0.92) !important;
+      transform: scale(0.92);
       box-shadow: 0 4px 6px rgba(0,0,0,0.05) inset;
     }
   </style>
 </head>
+
 <body>
   <header class="bg-dark text-white py-3">
     <div class="container d-flex justify-content-between align-items-center">
@@ -44,7 +47,7 @@
 
   <section id="home" class="text-center py-5" style="background: linear-gradient(to bottom, purple, navy); color: white;">
     <div class="container">
-      <marquee> Welcome to Yugyeom's Portfolio.</marquee>
+      <marquee>Welcome to Yugyeom's Portfolio.</marquee>
       <p class="lead">Explore my work and get to know more about me!</p>
     </div>
   </section>
@@ -76,16 +79,20 @@
     <div class="container">
       <h2 class="text-center mb-4">Projects</h2>
       <div class="row">
+
+        <!-- Project 1 -->
         <div class="col-md-4 mb-4">
           <div class="card">
             <img src="images/project1.jpg" class="card-img-top" alt="project1" />
             <div class="card-body">
               <h5 class="card-title">My Game</h5>
-              <p class="card-text">This is a avoiding game.Inspired by Geometry Dash.</p>
+              <p class="card-text">This is an avoiding game inspired by Geometry Dash.</p>
               <a href="project1.html" class="btn btn-primary project-link">Learn More</a>
             </div>
           </div>
         </div>
+
+        <!-- Project 2 -->
         <div class="col-md-4 mb-4">
           <div class="card">
             <img src="images/project2.jpg" class="card-img-top" alt="Project 2" />
@@ -96,6 +103,8 @@
             </div>
           </div>
         </div>
+
+        <!-- Project 3 -->
         <div class="col-md-4 mb-4">
           <div class="card">
             <img src="images/project3.jpg" class="card-img-top" alt="Project 3" />
@@ -106,11 +115,12 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Contact Me Section with EmailJS -->
+  <!-- CONTACT + EmailJS + reCAPTCHA v2 -->
   <section id="contact" class="py-5">
     <div class="container">
       <h2 class="text-center mb-4">Contact Me</h2>
@@ -122,8 +132,7 @@
             type="text" 
             class="form-control wider-input" 
             id="name" 
-            name="name" 
-            placeholder="Enter your name" 
+            name="name"
             required 
           />
         </div>
@@ -134,8 +143,7 @@
             type="email" 
             class="form-control wider-input" 
             id="email" 
-            name="email" 
-            placeholder="Enter your email" 
+            name="email"
             required 
           />
         </div>
@@ -145,12 +153,14 @@
           <textarea 
             class="form-control wider-input" 
             id="message" 
-            name="message" 
-            rows="5" 
-            placeholder="Write your message" 
+            name="message"
+            rows="5"
             required
           ></textarea>
         </div>
+
+        <!-- reCAPTCHA -->
+        <div class="g-recaptcha mb-3" data-sitekey="6Lc8DC8sAAAAAOasb4AHiHCCATFLIBN8WAviFotU"></div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
@@ -164,46 +174,37 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  <!-- EmailJS SDK -->
+  <!-- reCAPTCHA -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+  <!-- EmailJS -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+  <!-- Button Press Animation + Delayed Navigation -->
   <script>
-    (function(){
-      emailjs.init("cynlYuesM_GUpxOin"); // EmailJS Public Key
-
-      const form = document.getElementById("contact-form");
-      const status = document.getElementById("status");
-
-      form.addEventListener("submit", function(e){
-        e.preventDefault(); // 페이지 새로고침 방지
-
-        emailjs.sendForm("service_w93vcyl", "template_xr5nd6j", this)
-        .then(function(){
-          status.innerHTML = '<span class="text-success">메일이 성공적으로 전송되었습니다!</span>';
-          form.reset();
-        }, function(error){
-          status.innerHTML = '<span class="text-danger">메일 전송 실패. 다시 시도해주세요.</span>';
-          console.error("EmailJS Error:", error);
-        });
-      });
-    })();
-  </script>
-
-  <script>
-    // project-link 버튼 클릭 시 눌림 애니메이션
     (function(){
       const BUTTON_PRESS_DURATION = 180;
-      function handlePointerDown(e){ e.currentTarget.classList.add('pressed'); }
-      function handlePointerUp(e){ e.currentTarget.classList.remove('pressed'); }
+
+      function handlePointerDown(e){
+        e.currentTarget.classList.add('pressed');
+      }
+      function handlePointerUp(e){
+        e.currentTarget.classList.remove('pressed');
+      }
+
       document.querySelectorAll('.project-link').forEach(btn => {
         btn.addEventListener('pointerdown', handlePointerDown);
         btn.addEventListener('pointerup', handlePointerUp);
         btn.addEventListener('pointercancel', handlePointerUp);
         btn.addEventListener('pointerout', handlePointerUp);
+
         btn.addEventListener('click', function(ev){
           const href = btn.getAttribute('href');
           if (!href) return;
+
           ev.preventDefault();
           btn.classList.add('pressed');
+
           setTimeout(() => {
             btn.classList.remove('pressed');
             window.location.href = href;
@@ -212,5 +213,38 @@
       });
     })();
   </script>
+
+  <!-- EmailJS + reCAPTCHA 연동 -->
+  <script>
+    (function(){
+      emailjs.init("cynlYuesM_GUpxOin");
+
+      const form = document.getElementById("contact-form");
+      const status = document.getElementById("status");
+
+      form.addEventListener("submit", function(e){
+        e.preventDefault();
+
+        // reCAPTCHA 체크
+        const recaptchaResponse = grecaptcha.getResponse();
+        if (!recaptchaResponse) {
+          status.innerHTML = '<span class="text-danger">⚠ Please complete the reCAPTCHA.</span>';
+          return;
+        }
+
+        emailjs.sendForm("service_w93vcyl", "template_xr5nd6j", this)
+        .then(() => {
+          status.innerHTML = '<span class="text-success">메일이 성공적으로 전송되었습니다!</span>';
+          form.reset();
+          grecaptcha.reset();
+        })
+        .catch((error) => {
+          status.innerHTML = '<span class="text-danger">메일 전송 실패. 다시 시도해주세요.</span>';
+          console.error("EmailJS Error:", error);
+        });
+      });
+    })();
+  </script>
+
 </body>
 </html>
