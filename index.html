@@ -8,14 +8,14 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/style.css" />
-
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
 
+  <!-- reCAPTCHA v3 -->
+  <script src="https://www.google.com/recaptcha/api.js?render=6Lc8DC8sAAAAAOasb4AHiHCCATFLIBN8WAviFotU"></script>
+
   <style>
-    /* 더 부드러운 버튼 눌림 애니메이션 */
+    body { font-family: 'Poppins', sans-serif; }
+
     .card .btn {
       transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
       will-change: transform;
@@ -29,222 +29,125 @@
     }
   </style>
 </head>
-
 <body>
-  <header class="bg-dark text-white py-3">
-    <div class="container d-flex justify-content-between align-items-center">
-      <h1 class="h3">My Portfolio</h1>
-      <nav>
-        <ul class="nav">
-          <li class="nav-item"><a href="#home" class="nav-link text-white">Home</a></li>
-          <li class="nav-item"><a href="#about" class="nav-link text-white">About</a></li>
-          <li class="nav-item"><a href="#projects" class="nav-link text-white">Projects</a></li>
-          <li class="nav-item"><a href="#contact" class="nav-link text-white">Contact</a></li>
+
+<header class="bg-dark text-white py-3">
+  <div class="container d-flex justify-content-between align-items-center">
+    <h1 class="h3">My Portfolio</h1>
+    <nav>
+      <ul class="nav">
+        <li class="nav-item"><a href="#home" class="nav-link text-white">Home</a></li>
+        <li class="nav-item"><a href="#about" class="nav-link text-white">About</a></li>
+        <li class="nav-item"><a href="#projects" class="nav-link text-white">Projects</a></li>
+        <li class="nav-item"><a href="#contact" class="nav-link text-white">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section id="home" class="text-center py-5" style="background: linear-gradient(to bottom, purple, navy); color: white;">
+  <div class="container">
+    <marquee>Welcome to Yugyeom's Portfolio.</marquee>
+    <p class="lead">Explore my work and get to know more about me!</p>
+  </div>
+</section>
+
+<section id="about" class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">About Me</h2>
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <img src="images/profile.jpg" alt="My photo" class="rounded-circle img-fluid" style="width:300px;height:300px;" />
+      </div>
+      <div class="col-md-8">
+        <p style="font-size:1.25rem; line-height:1.8;">Hi! My name is Yugyeom, also known as Leo. I am currently in 7th grade.</p>
+        <ul style="font-size:1.25rem; line-height:1.8;">
+          <li>Game development award winner</li>
+          <li>Entry & Swift 5.8 experience</li>
+          <li>Music composition & instruments</li>
+          <li>International travel experience</li>
+          <li>Swimming competitions & awards</li>
         </ul>
-      </nav>
+      </div>
     </div>
-  </header>
+  </div>
+</section>
 
-  <section id="home" class="text-center py-5" style="background: linear-gradient(to bottom, purple, navy); color: white;">
-    <div class="container">
-      <marquee>Welcome to Yugyeom's Portfolio.</marquee>
-      <p class="lead">Explore my work and get to know more about me!</p>
-    </div>
-  </section>
-
-  <section id="about" class="py-5">
-    <div class="container">
-      <h2 class="text-center mb-4">About Me</h2>
-      <div class="row">
-        <div class="col-md-4 text-center">
-          <img src="images/profile.jpg" alt="My photo" class="rounded-circle img-fluid" style="width: 300px; height: 300px;" />
-        </div>
-        <div class="col-md-8">
-          <p style="font-size: 1.25rem; line-height: 1.8;">
-            Hi! My name is Yugyeom, also known as Leo. I am currently in 7th grade.
-          </p>
-          <ul style="font-size: 1.25rem; line-height: 1.8;">
-            <li>One of my proudest achievements is winning a game development award at a church coding competition.</li>
-            <li>I am skilled in using platforms like Entry and Swift 5.8 (for Playgrounds).</li>
-            <li>I enjoy playing musical instruments and composing, which has helped me build a strong foundation in music.</li>
-            <li>Traveling to many countries with my parents has broadened my cultural perspectives.</li>
-            <li>I have participated in swimming competitions and won awards through consistent effort.</li>
-          </ul>
+<section id="projects" class="bg-light py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Projects</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <img src="images/project1.jpg" class="card-img-top" />
+          <div class="card-body">
+            <h5 class="card-title">My Game</h5>
+            <p class="card-text">Avoiding game inspired by Geometry Dash.</p>
+            <a href="project1.html" class="btn btn-primary project-link">Learn More</a>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="projects" class="bg-light py-5">
-    <div class="container">
-      <h2 class="text-center mb-4">Projects</h2>
-      <div class="row">
+<section id="contact" class="py-5">
+  <div class="container">
+    <h2 class="text-center mb-4">Contact Me</h2>
 
-        <!-- Project 1 -->
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img src="images/project1.jpg" class="card-img-top" alt="project1" />
-            <div class="card-body">
-              <h5 class="card-title">My Game</h5>
-              <p class="card-text">This is an avoiding game inspired by Geometry Dash.</p>
-              <a href="project1.html" class="btn btn-primary project-link">Learn More</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 2 -->
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img src="images/project2.jpg" class="card-img-top" alt="Project 2" />
-            <div class="card-body">
-              <h5 class="card-title">Project 2</h5>
-              <p class="card-text">This is a music that I made.</p>
-              <a href="project2.html" class="btn btn-primary project-link">Learn More</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project 3 -->
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img src="images/project3.jpg" class="card-img-top" alt="Project 3" />
-            <div class="card-body">
-              <h5 class="card-title">Project 3</h5>
-              <p class="card-text">Not yet.</p>
-              <a href="project3.html" class="btn btn-primary project-link">Learn More</a>
-            </div>
-          </div>
-        </div>
-
+    <form id="contact-form">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control" required>
       </div>
-    </div>
-  </section>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" name="email" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea name="message" rows="5" class="form-control" required></textarea>
+      </div>
 
-  <!-- CONTACT + EmailJS + reCAPTCHA v2 -->
-  <section id="contact" class="py-5">
-    <div class="container">
-      <h2 class="text-center mb-4">Contact Me</h2>
+      <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
 
-      <form id="contact-form">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input 
-            type="text" 
-            class="form-control wider-input" 
-            id="name" 
-            name="name"
-            required 
-          />
-        </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input 
-            type="email" 
-            class="form-control wider-input" 
-            id="email" 
-            name="email"
-            required 
-          />
-        </div>
+    <div id="status" class="mt-3 text-center"></div>
+  </div>
+</section>
 
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea 
-            class="form-control wider-input" 
-            id="message" 
-            name="message"
-            rows="5"
-            required
-          ></textarea>
-        </div>
+<!-- JS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+(function(){
+  emailjs.init("cynlYuesM_GUpxOin");
 
-        <!-- reCAPTCHA -->
-        <div class="g-recaptcha mb-3" data-sitekey="6Lc8DC8sAAAAAOasb4AHiHCCATFLIBN8WAviFotU"></div>
+  const form = document.getElementById("contact-form");
+  const status = document.getElementById("status");
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
 
-      <div id="status" class="mt-3 text-center"></div>
-    </div>
-  </section>
+    grecaptcha.ready(function(){
+      grecaptcha.execute("6Lc8DC8sAAAAAOasb4AHiHCCATFLIBN8WAviFotU", {action:"submit"})
+      .then(function(token){
+        document.getElementById("g-recaptcha-response").value = token;
 
-  <!-- Bootstrap JS -->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-  <!-- reCAPTCHA -->
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
-  <!-- EmailJS -->
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-
-  <!-- Button Press Animation + Delayed Navigation -->
-  <script>
-    (function(){
-      const BUTTON_PRESS_DURATION = 180;
-
-      function handlePointerDown(e){
-        e.currentTarget.classList.add('pressed');
-      }
-      function handlePointerUp(e){
-        e.currentTarget.classList.remove('pressed');
-      }
-
-      document.querySelectorAll('.project-link').forEach(btn => {
-        btn.addEventListener('pointerdown', handlePointerDown);
-        btn.addEventListener('pointerup', handlePointerUp);
-        btn.addEventListener('pointercancel', handlePointerUp);
-        btn.addEventListener('pointerout', handlePointerUp);
-
-        btn.addEventListener('click', function(ev){
-          const href = btn.getAttribute('href');
-          if (!href) return;
-
-          ev.preventDefault();
-          btn.classList.add('pressed');
-
-          setTimeout(() => {
-            btn.classList.remove('pressed');
-            window.location.href = href;
-          }, BUTTON_PRESS_DURATION);
-        });
-      });
-    })();
-  </script>
-
-  <!-- EmailJS + reCAPTCHA 연동 -->
-  <script>
-    (function(){
-      emailjs.init("cynlYuesM_GUpxOin");
-
-      const form = document.getElementById("contact-form");
-      const status = document.getElementById("status");
-
-      form.addEventListener("submit", function(e){
-        e.preventDefault();
-
-        // reCAPTCHA 체크
-        const recaptchaResponse = grecaptcha.getResponse();
-        if (!recaptchaResponse) {
-          status.innerHTML = '<span class="text-danger">⚠ Please complete the reCAPTCHA.</span>';
-          return;
-        }
-
-        emailjs.sendForm("service_w93vcyl", "template_xr5nd6j", this)
-        .then(() => {
-          status.innerHTML = '<span class="text-success">메일이 성공적으로 전송되었습니다!</span>';
+        emailjs.sendForm("service_w93vcyl", "template_xr5nd6j", form)
+        .then(function(){
+          status.innerHTML = "<span class='text-success'>메일 전송 성공!</span>";
           form.reset();
-          grecaptcha.reset();
-        })
-        .catch((error) => {
-          status.innerHTML = '<span class="text-danger">메일 전송 실패. 다시 시도해주세요.</span>';
-          console.error("EmailJS Error:", error);
+        }, function(err){
+          status.innerHTML = "<span class='text-danger'>메일 전송 실패</span>";
+          console.error(err);
         });
       });
-    })();
-  </script>
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
